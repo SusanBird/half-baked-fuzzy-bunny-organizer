@@ -13,6 +13,7 @@ logoutButton.addEventListener('click', () => {
 function displayFamilies() {
     // fetch families from supabase
     // clear out the familiesEl
+    // getFamilies();
     familiesEl.textContent = '';
 
     for (let family of familiesEl) {
@@ -46,17 +47,21 @@ function displayFamilies() {
         //redisplay all families.
 
         for (let bunny of family.fuzzy_bunnies) {
-            const bunnyEl = document.createElement('a');
+            const bunnyEl = document.createElement('div');
 
             bunnyEl.classList.add('bunny');
 
             bunnyEl.textContent = bunny.name;
 
             bunnyEl.addEventListener('click', async () => {
-                deleteBunny();             //  bunnyEl.textContent = '';
+                await deleteBunny(bunny.id);             //  bunnyEl.textContent = '';
                                           //or window.location.replace(../edit-bunnies/?id={`bunny.id`});
                                            // first option might keep bunny and delete name only...     
-                displayFamilies();
+                
+                //then refetch and redisplay all families.
+                const updatedFamilies = await getFamilies();
+
+                displayFamilies(updatedFamilies);
             });
             // append this bunnyEl to the bunniesEl
             bunniesEl.append(bunnyEl);

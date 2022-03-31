@@ -27,13 +27,13 @@ export async function deleteBunny(id) {
     return checkError(response);
 }
 
-export async function createBunny(bunny, family_id) {
+export async function createBunny(bunny) {
     // create a bunny using the bunny argument
     const response = await client
         .from('fuzzy_bunnies')              
         .insert({
-            name: bunny,
-            family_id: family_id               
+            ...bunny,
+            user_id: client.auth.session().user.id,            
         });
 
     return checkError(response);
@@ -72,5 +72,6 @@ export async function logout() {
 }
 
 function checkError({ data, error }) {
+    // eslint-disable-next-line no-console
     return error ? console.error(error) : data;
 }
