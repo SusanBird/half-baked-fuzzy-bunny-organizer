@@ -9,6 +9,7 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
+
 function displayFamilies() {
     // fetch families from supabase
     // clear out the familiesEl
@@ -45,19 +46,20 @@ function displayFamilies() {
         //redisplay all families.
 
         for (let bunny of family.fuzzy_bunnies) {
-            const bunnyLink = document.createElement('a');
+            const bunnyEl = document.createElement('a');
 
-            bunnyLink.classList.add('bunny');
+            bunnyEl.classList.add('bunny');
 
-            bunnyLink.textContent = bunny.name;
+            bunnyEl.textContent = bunny.name;
 
-            bunnyLink.addEventListener('click', async () => {
-                bunnyLink.textContent = '';  //or window.location.replace(../edit-bunnies/?id={`bunny.id`});
-                
+            bunnyEl.addEventListener('click', async () => {
+                deleteBunny();             //  bunnyEl.textContent = '';
+                                          //or window.location.replace(../edit-bunnies/?id={`bunny.id`});
+                                           // first option might keep bunny and delete name only...     
                 displayFamilies();
             });
             // append this bunnyEl to the bunniesEl
-            bunniesEl.append(bunnyLink);
+            bunniesEl.append(bunnyEl);
         }
         // append the bunniesEl and nameEl to the familyEl
         familyEl.append(bunniesEl, familyNameEl);
