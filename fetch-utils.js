@@ -33,7 +33,7 @@ export async function createBunny(bunny, family_id) {
         .from('fuzzy_bunnies')              
         .insert({
             name: bunny,
-            family_id: family_id                //family ID instead?
+            family_id: family_id               
         });
 
     return checkError(response);
