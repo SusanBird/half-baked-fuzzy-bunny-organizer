@@ -10,13 +10,13 @@ logoutButton.addEventListener('click', () => {
 });
 
 
-function displayFamilies() {
+function displayFamilies(families) {
     // fetch families from supabase
     // clear out the familiesEl
     // getFamilies();
     familiesEl.textContent = '';
 
-    for (let family of familiesEl) {
+    for (let family of families) {
 
         // create three elements for each family, one for the whole family, one 
         //to hold the name, and one to hold the bunnies
@@ -72,7 +72,6 @@ function displayFamilies() {
         // append the familyEl to the familiesEl
         familiesEl.append(familyEl);
     }
-
 }
 
 window.addEventListener('load', async () => {
